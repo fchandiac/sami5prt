@@ -1,0 +1,16 @@
+.number_keyboard_row{
+    display: grid;
+    grid-template-columns: 34%  34% 32%;
+    grid-template-rows: 4.5rem;
+}
+.number-keyboard-last-col{
+    margin-right: 0 !important;
+}
+.number_keyboard_row .btn {
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+}
+.number-keyboard-0-btn{
+    grid-column: 1/3
+}

@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> <!-- Bootstrap css -->
+    <link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Bootstrap css -->
+    <link href="./css/sami.css" rel="stylesheet" /> <!-- My css -->
+    <link href="./css/grid.css" rel="stylesheet" /> <!-- My grid css -->
+    <link href="./css/number_keyboard.css" rel="stylesheet" /> <!-- My grid css -->
+    <title>Sami5</title>
+</head>
+<header>
+    <div id="top_bar" class="top-bar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a id="cash_resgister_tab_btn" class="nav-link active" id="products_tab_btn">Caja</a>
+            </li>
+            <li class="nav-item">
+                <a id="movements_tab_btn" class="nav-link no-active-tab">Movimientos de caja</a>
+            </li>
+            <li class="nav-item">
+                <a id="orders_tab_btn" class="nav-link no-active-tab">Pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a id="products_tab_btn" class="nav-link no-active-tab">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a id="sales_tab_btn" class="nav-link a-tab-item no-active-tab">Ventas</a>
+            </li>
+            <li class="nav-item">
+                <a id="stocks_tab_btn" class="nav-link a-tab-item no-active-tab">Stock</a>
+            </li>
+            <li class="nav-item">
+                <a id="config_tab_btn" class="nav-link a-tab-item no-active-tab">Configuración</a>
+            </li>
+        </ul>
+        <button id="close_app_btn" class="btn btn-success close-app-btn">Salir</button>
+    </div>
+</header>
+
+<body>
+    <div id="cash_register_body" class="content-body-col-40-60">
+        <div>
+            <div id="container_finders_01" class="conten-col-50-50">
+                <form class="funcional-box control-bar  mrgn-bottom pdd-left" onsubmit="return false">
+                    <label id="codigo_label" class="col-sm-3 col-form-label">Código</label>
+                    <div class="col-sm-6">
+                        <input id="cash_register_code_input" type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-sm-2 mrgn-left">
+                        <button id="add_to_cart_from_code_btn" class="btn btn-primary btn-sm"><i
+                                class="bi bi-arrow-right-circle-fill"></i></button>
+                    </div>
+                </form>
+
+                <form id="order_loader_form" class="funcional-box control-bar mrgn-left mrgn-bottom pdd-left pdd-right"
+                    onsubmit="return false">
+                    <label class="col-sm-3 col-form-label">Pedido</label>
+                    <div class="col-sm">
+                        <input id="order_id_input" type="text" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-sm-2 mrgn-left">
+                        <button id="add_order_btn" class="btn btn-primary btn-sm"><i
+                                class="bi bi-arrow-right-circle-fill"></i></button>
+                    </div>
+                </form>
+
+                <form id="search_form" class="funcional-box control-bar mrgn-left mrgn-bottom pdd-left pdd-right"
+                    onsubmit="return false">
+                    <div class="col-sm">
+                        <input id="search_input" class="form-control form-control-sm" placeholder="Buscar producto..."
+                            type="text" required>
+                    </div>
+                    <div class="col-sm-2 mrgn-left">
+                        <button id="search_btn" class="btn btn-primary btn-sm">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                    </div>
+                    <div id="search_ul"
+                        style="position: absolute; margin-top: 2rem; background-color: white; z-index: 2;"></div>
+                </form>
+            </div>
+
+            <div id="btn_product_container" class=""></div>
+
+            <div id="product_finder" class="funcional-box">
+                <div id="products_finder_grid_container">
+                    <div id="products_finder_grid"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="mrgn-right">
+                <div class="total-box funcional-box control-bar mrgn-left mrgn-bottom">
+                    <h2 class="">Total: </h2>
+                    <h2 id="total_label" class=""></h2>
+                </div>
+            </div>
+            <div id="cash_register_cart_grid_container">
+                <div id="cash_register_cart_grid"></div>
+            </div>
+            <div class="pay-parameters-box ">
+                <div class="orders-to-close-box">
+                    <p>Pedidos a cerrar:</p>
+                    <div id="order_to_close_container"></div>
+                </div>
+                <div class="conten-col-4">
+                    <div class="mrgn-top mrgn-left">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_option" id="cash_payment_option"
+                                checked>
+                            <label class="form-check-label">Efectivo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_option" id="debit_payment_option"
+                                value="option2">
+                            <label class="form-check-label">Débito</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_option"
+                                id="credit_payment_option" value="option2">
+                            <label class="form-check-label">Transferencia</label>
+                        </div>
+                    </div>
+                    <div class="mrgn-top">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="ticket_option" id="ticket_radio"
+                                value="0" checked>
+                            <label class="form-check-label">Ticket</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="ticket_option" id="boleta_radio"
+                                value="1">
+                            <label class="form-check-label">Boleta</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="ticket_option" id="no_printer_radio"
+                                value="2">
+                            <label class="form-check-label">sin Impresora</label>
+                        </div>
+                    </div>
+                    <div class="mrgn-top align-left mrgn-right">
+                        <button id="quote_btn" class="btn btn-primary">Cotizar</button>
+                        <button id="order_btn" class="btn btn-primary">Nuevo Pedido</button>
+                    </div>
+                    <div class="mrgn-top save-btn mrgn-right">
+                        <button id="pay_btn" class="btn btn-primary btn-pay">PAGAR</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div id="movements_body" class="content-body-col-20-80 collapse">
+        <div>
+            <div class="funcional-box pdng-top-0 pdd-left" style="margin-top: 3.4rem; height: 15%;">
+                <h5 class="pdd-top">Balance de caja</h5>
+                <label id="balance_label" class="total-label"></label><br><br><br><br>
+            </div>
+            <div class="funcional-box pdng-top-0 pdd-left mrgn-top">
+                <button id="money_income_btn" class="btn btn-primary mrgn-top">Ingreso</button><br>
+                <button id="money_out_btn" class="btn btn-primary mrgn-top">Egreso</button><br>
+                <button id="open_cash_drawer_btn" class="btn btn-primary mrgn-top">Abrir Gaveta</button><br>
+                <button id="close_cash_register_btn" class="btn btn-primary mrgn-top mrgn-bottom">Cerrar Caja</button>
+            </div>
+        </div>
+
+        <div id="movements_grid_container">
+            <div id="movements_grid"></div>
+        </div>
+    </div>
+    <div id="orders_body" class="content-body-col-20-20-60 collapse">
+
+
+        <div>
+            <div class="funcional-box pdng-top-0 pdd-left"
+                style="margin-top: 3.4rem; height: 23%; margin-right: 1rem; ">
+                <button id="delete_closes_orders_btn" class="btn btn-primary mrgn-top"><i class="bi bi-trash"></i>
+                    pedidos
+                    cerrados</button><br>
+                <button id="delete_past_orders_btn" class="btn btn-primary mrgn-top"><i class="bi bi-trash"></i> pedidos
+                    anteriores</button><br>
+            </div>
+            <div class="funcional-box  pdd-left mrgn-right" style="margin-top: 3.4rem; height: 55%;">
+                <h5>Cargar Delivery</h5>
+                <div class="load-table">
+                    <button id="dm1_btn" class="btn btn-primary btn-table-2">D1</button>
+                    <button id="dm2_btn" class="btn btn-primary btn-table-2">D2</button>
+                    <button id="dm3_btn" class="btn btn-primary btn-table-2">D3</button>
+                    <button id="dm4_btn" class="btn btn-primary btn-table-2">D4</button>
+                    <button id="dm5_btn" class="btn btn-primary btn-table-2">D5</button>
+                    <button id="dm6_btn" class="btn btn-primary btn-table-2">D6</button>
+                    <button id="dm7_btn" class="btn btn-primary btn-table-2">D7</button>
+                    <button id="dm8_btn" class="btn btn-primary btn-table-2">D8</button>
+                    <button id="dm9_btn" class="btn btn-primary btn-table-2">D9</button>
+                    <button id="dm10_btn" class="btn btn-primary btn-table-2">D10</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="funcional-box  pdd-left" style="margin-top: 3.4rem; height: 55%;">
+            <h5>Cargar mesas</h5>
+            <div class="load-table">
+                <button id="m1_btn" class="btn btn-primary btn-table-2">M1</button>
+                <button id="m2_btn" class="btn btn-primary btn-table-2">M2</button>
+                <button id="m3_btn" class="btn btn-primary btn-table-2">M3</button>
+                <button id="m4_btn" class="btn btn-primary btn-table-2">M4</button>
+                <button id="m5_btn" class="btn btn-primary btn-table-2">M5</button>
+                <button id="m6_btn" class="btn btn-primary btn-table-2">M6</button>
+                <button id="m7_btn" class="btn btn-primary btn-table-2">M7</button>
+                <button id="m8_btn" class="btn btn-primary btn-table-2">M8</button>
+                <button id="m9_btn" class="btn btn-primary btn-table-2">M9</button>
+                <button id="m10_btn" class="btn btn-primary btn-table-2">M10</button>
+            </div>
+        </div>
+
+        <div id="orders_grid_container">
+            <div id="orders_grid"></div>
+        </div>
+    </div>
+    <div id="products_body" class="content-body-col-40-60 collapse">
+        <div class="conten-col-2">
+            <form id="new_product_form" class="funcional-box line-1-3 mrgn-bottom pdd-left pdd-bottom"
+                onsubmit="return false">
+                <h6>Nuevo Producto</h6>
+                <div class="conten-col-2">
+                    <div id="inputs_new_product_1_group" class="pdd-right">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input id="name_product_input" class="form-control form-control-sm" type="text"
+                                maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Precio de venta</label>
+                            <input id="sale_value_input" class="form-control form-control-sm" type="text" maxlength="11"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select id="category_select" class="form-control form-control-sm" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="inputs_new_product_2_group" class="pdd-right">
+                        <div class="form-group">
+                            <label>Impuesto</label>
+                            <select id="taxes_select" class="form-control form-control-sm"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Código</label>
+                            <input id="code_product_input" class="form-control form-control-sm" type="text" required>
+                        </div>
+                        <div class="form-group save-btn">
+                            <br>
+                            <button id="save_product_btn" class="btn btn-primary btn-sm">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form id="new_category_form" class="funcional-box line-1-3 pdd-left pdd-right mrgn-bottom"
+                onsubmit="return false">
+                <h6>Nuevo Categoría</h6>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm">
+                        <input id="category_name_input" class="form-control form-control-sm" type="text" maxlength="20"
+                            required>
+                    </div>
+                    <div class="col-sm">
+                        <button id="save_category_btn" class="btn btn-primary btn-sm">Guardar</button>
+                    </div>
+
+                </div>
+            </form>
+            <form id="new_tax_form" class="funcional-box line-1-3 pdd-left pdd-right mrgn-bottom"
+                onsubmit="return false">
+                <h6>Nuevo Impuesto</h6>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label no-pdd-r">Nombre</label>
+                    <div class="col-sm-3 no-pdd-r">
+                        <input id="tax_name_input" class="form-control form-control-sm" type="text" maxlength="20"
+                            required>
+                    </div>
+                    <label class="col-sm-2 col-form-label no-pdd-r align-right">Valor</label>
+                    <div class="col-sm-2 no-pdd-r">
+                        <input id="value_tax_input" class="form-control form-control-sm" type="text" required
+                            pattern="[0-9][.][0-9][0-9]" title="ej: 1.19">
+                    </div>
+                    <div class="col-sm-1 no-pdd-r">
+                        <button id="save_tax_btn" class="btn btn-primary btn-sm">Guardar</button>
+                    </div>
+
+                </div>
+            </form>
+            <form id="select_edit_category_form" class="funcional-box pdd-left pdd-right mrgn-mid-right"
+                onsubmit="return false">
+                <h6>Editar categoría</h6>
+                <div class="mb-3 row">
+                    <div class="col-sm no-pdd-r">
+                        <select id="edit_ctaegory_select" class="form-control form-control-sm" required>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="edit_category_btn" class="btn btn-primary btn-sm"><i
+                                class="bi bi-pencil-square"></i></button>
+                    </div>
+                </div>
+            </form>
+            <form id="select_edit_tax_form" class="funcional-box pdd-left pdd-right mrgn-mid-left"
+                onsubmit="return false">
+                <h6>Editar impuesto</h6>
+                <div class="mb-3 row">
+                    <div class="col-sm no-pdd-r">
+                        <select id="edit_tax_select" class="form-control form-control-sm" required>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="edit_tax_btn" class="btn btn-primary btn-sm"><i
+                                class="bi bi-pencil-square"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="products_grid_container">
+            <div id="products_grid"></div>
+        </div>
+    </div>
+    <div id="sales_body" class="content-body-col-40-60 collapse">
+        <div class="content-col-60-40">
+            <div>
+                <canvas id="sales_month_chart" style="height: 39vh;"></canvas>
+                <canvas id="sales_day_chart" style="height: 39vh;"></canvas>
+                <div>
+                    <form class="funcional-box control-bar mrgn-bottom total-box" onsubmit="return false">
+                        <label> Ventas del mes</label>
+                        <button id="print_month_sales_btn" class="btn btn-primary btn-sm mrgn-left mrgn-bottom"><i
+                                class="bi bi-printer"></i></button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="mrgn-left">
+                <form id="categories_chart_form" class="funcional-box pdd-left pdd-bottom pdd-right"
+                    onsubmit="return false">
+                    <div id="config_categories_chart_btn" class="form-group">
+                        <i id="down_icon_config_categories_chart" class="bi bi-chevron-down"></i>
+                        <i id="up_icon_config_categories_chart" class="bi bi-chevron-up"></i>
+                        Configurar gráfico
+                    </div>
+                    <div id="content_config_categories_chart">
+                        <div class="form-group mid-mrgn-top">
+                            <input id="category_start_date_input" type="text" class="form-control form-control-sm"
+                                placeholder="fecha inicial" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                required>
+                        </div>
+                        <div class="form-group mid-mrgn-top">
+                            <input id="category_end_date_input" type="text" class="form-control form-control-sm"
+                                placeholder="fecha final" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                required>
+                        </div>
+                        <div class="form-group save-btn mid-mrgn-top">
+                            <button id="categories_chart_btn" class="btn btn-primary btn-sm"><i
+                                    class="bi bi-pie-chart-fill"></i></button>
+                        </div>
+
+                    </div>
+                </form>
+                <canvas id="sales_categories_chart"></canvas>
+                <form id="products_chart_form" class="funcional-box pdd-left mrgn-top pdd-bottom pdd-right"
+                    onsubmit="return false">
+                    <div id="config_products_chart_btn" class="form-group">
+                        <i id="down_icon_config_products_chart" class="bi bi-chevron-down"></i>
+                        <i id="up_icon_config_products_chart" class="bi bi-chevron-up"></i>
+                        Configurar gráfico
+                    </div>
+                    <div id="content_config_products_chart">
+                        <div class="form-group mid-mrgn-top">
+                            <input id="product_start_date_input" type="text" class="form-control form-control-sm"
+                                placeholder="fecha inicial" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                required>
+                        </div>
+                        <div class="form-group mid-mrgn-top">
+                            <input id="product_end_date_input" type="text" class="form-control form-control-sm"
+                                placeholder="fecha final" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                required>
+                        </div>
+                        <div class="form-group save-btn mid-mrgn-top">
+                            <button id="products_chart_btn" class="btn btn-primary btn-sm"><i
+                                    class="bi bi-pie-chart-fill"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <canvas id="sales_products_chart"></canvas>
+            </div>
+        </div>
+        <div>
+            <div id="sales_grid_container" class="mrgn-bottom">
+                <div id="sales_grid"></div>
+            </div>
+            <form id="sales_grid_form" class="funcional-box control-bar mrgn-left mrgn-right mrgn-bottom pdd-left"
+                onsubmit="return false">
+                <div class="mb-3 row">
+                    <!-- <label class="col-sm-2 col-form-label">fecha inicial</label> -->
+                    <div class="col-sm-3">
+                        <input id="start_sales_grid_date_imput" type="text" class="form-control form-control-sm"
+                            placeholder="fecha inicial" onfocus="(this.type='date')" onblur="(this.type='text')"
+                            required>
+                    </div>
+                    <!-- <label class="col-sm-2 col-form-label">fecha final</label> -->
+                    <div class="col-sm-3">
+                        <input id="end_sales_grid_date_imput" type="text" class="form-control form-control-sm"
+                            placeholder="fecha final" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                    </div>
+                    <label class="col-sm col-form-label">categoría</label>
+
+                    <div class="col-sm">
+                        <select id="sales_grid_ctaegory_select" class="form-control form-control-sm" required>
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
+                        <button id="render_grid_btn" class="btn btn-primary btn-sm save-btn"><i
+                                class="bi bi-table"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="stocks_body" class=" content-body-col-20-80 collapse">
+        <div>
+            <form id="search_product_stock_form" class="funcional-box mrgn-bottom pdd-left pdd-right"
+                style="margin-top: 3.4rem" onsubmit="return false">
+                <h5>Nuevo Stock</h5>
+                <div class="form-group mrgn-bottom">
+                    <label>Producto</label>
+                    <input id="search_input_stcock" class="form-control form-control-sm"
+                        placeholder="Buscar producto..." type="text" required>
+                    <div id="search_ul_stock" style="position: absolute; background-color: white;"></div>
+                </div>
+                <div class="form-group mrgn-bottom">
+                    <label>Stock sala</label>
+                    <input id="add_room_input" type="number" class="form-control form-control-sm" required>
+                </div>
+                <div class="form-group mrgn-bottom">
+                    <label>Stock Bodega</label>
+                    <input id="add_warehouse_imput" type="number" class="form-control form-control-sm" required>
+                </div>
+                <div class="form-group mrgn-bottom">
+                    <button id="add_stock_btn" class="btn btn-primary save-btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div id="stock_grid_container">
+            <div id="stock_grid"></div>
+        </div>
+    </div>
+    <div id="config_body" class="content-body-col-3 collapse">
+        <div class="funcional-box mrgn-bottom pdd-left">
+            <h6>Modulos</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Buscador de productos</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="product_finder_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Teclado númerico</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="number_keyboard_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Cotización</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="quote_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Botones productos favoritos</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="products_buttons_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Carro de compras pequeño</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="small_shopping_cart_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Botón editar cantidad</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="edit_quanty_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Buscador rápido</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="litle_finder_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Cargador Carro de compra</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="shoppingcart_loader_switch" />
+                </div>
+            </div>
+        </div>
+        <div class="funcional-box mrgn-left mrgn-bottom pdd-left">
+            <h6>Base de datos</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Usuario</label>
+                <div class="col-sm-7">
+                    <input id="config_user_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Contraseña</label>
+                <div class="col-sm-7">
+                    <input id="config_password_input" type="password" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Base de datos</label>
+                <div class="col-sm-7">
+                    <input id="config_db_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Host</label>
+                <div class="col-sm-7">
+                    <input id="config_host_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Puerto</label>
+                <div class="col-sm-7">
+                    <input id="config_port_input" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Dialecto</label>
+                <div class="col-sm-7">
+                    <input id="config_dialect_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+        <div class="funcional-box mrgn-left mrgn-bottom pdd-left mrgn-right">
+            <h6>Boleta</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Razon social</label>
+                <div class="col-sm-7">
+                    <input id="config_razon_social_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Fantasia</label>
+                <div class="col-sm-7">
+                    <input id="config_fantasia_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Rut</label>
+                <div class="col-sm-7">
+                    <input id="config_rut_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Dirección</label>
+                <div class="col-sm-7">
+                    <input id="config_direccion_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Teléfono</label>
+                <div class="col-sm-7">
+                    <input id="config_telefono_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Medio de pago externo</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="external_payment_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Token Lioren</label>
+                <div class="col-sm-7">
+                    <input id="config_token_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Lioren mail</label>
+                <div class="col-sm-7">
+                    <input id="config_mail_lioren_input" type="text" class="form-control form-control-sm" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="funcional-box mrgn-bottom pdd-left">
+            <h6>Impresoras</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-5 col-form-label">vendor impresora 1</label>
+                <div class="col-sm-6">
+                    <input id="config_vendor_input" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-5 col-form-label">product impresora 1</label>
+                <div class="col-sm-6">
+                    <input id="config_product_input" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-5 col-form-label">vendor impresora 2</label>
+                <div class="col-sm-6">
+                    <input id="config_vendor_2_input" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-5 col-form-label">product impresora 2</label>
+                <div class="col-sm-6">
+                    <input id="config_product_2_input" type="number" class="form-control form-control-sm">
+                </div>
+            </div>
+        </div>
+
+        <div class="funcional-box mrgn-left mrgn-bottom pdd-left">
+            <h6>Segundo ticket</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Activar</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="second_ticket_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <h8>Impresora</h8>
+                <label class="col-sm-2 col-form-label">1</label>
+                <div class="col-sm-1 form-check">
+                    <input class="form-check-input" type="radio" name="printer_option" id="printer_1_radio" value="0"
+                        checked>
+                </div>
+                <label class="col-sm-2 col-form-label">2</label>
+                <div class="col-sm-1 form-check">
+                    <input class="form-check-input" type="radio" name="printer_option" id="printer_2_radio" value="1"
+                        checked>
+                </div>
+                <label class="col-sm-2 col-form-label">Ambas</label>
+                <div class="col-sm-1 form-check">
+                    <input class="form-check-input" type="radio" name="printer_option" id="printer_3_radio" value="3"
+                        checked>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Titulo</label>
+                <div class="col-sm-7">
+                    <input id="second_ticket_title_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Código de barras</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="second_ticket_barcode_switch" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-9 col-form-label">Selección Mesa - Delivery</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="select_table_switch" />
+                </div>
+            </div>
+        </div>
+
+        <div class="funcional-box mrgn-left mrgn-bottom pdd-left mrgn-right">
+            <h6>otros</h6>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Zona horaria</label>
+                <div class="col-sm-7">
+                    <input id="locale_config_input" type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Código autorización</label>
+                <div class="col-sm-7">
+                    <button id="change_code_btn" class="btn btn-primary">cambiar</button>
+                </div>
+            </div>
+        </div>
+        <div class="funcional-box mrgn-left pdd-left mrgn-bottom">
+            <h6>Menú superior</h6>
+            <div class="mb-3 row">
+                <!-- <label class="col-sm-9 col-form-label">Módulo Carro de compras</label>
+                <div class="col-sm-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="Shopping_cart_menu_switch" />
+                </div> -->
+            </div>
+        </div>
+
+        <div class="save-btn mrgn-right">
+            <button id="save_config_btn" class="btn btn-success">Guardar y salir</button>
+        </div>
+
+    </div>
+</body>
+<div id="destroy_msg_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm alert-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar</h5>
+            </div>
+            <div class="modal-body">
+                <label id="destroy_msg"></label>
+            </div>
+            <div class="modal-footer">
+                <button id="destroy_modal_btn" class="btn btn-danger" type="button">Eliminar</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="update_product_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar Producto</h5>
+            </div>
+            <div class="modal-body">
+                <form id="update_product_form" onsubmit="return false">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input id="name_product_update_input" class="form-control" type="text" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input id="code_product_update_input" class="form-control" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio de venta</label>
+                        <input id="sale_value_update_input" class="form-control" type="text" maxlength="11" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select id="category_select_update" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Impuesto</label>
+                        <select id="taxes_select_update" class="form-control"></select>
+                    </div>
+                    <div class="modal-footer mrgn-top ">
+                        <button id="update_product_btn" class="btn btn-primary" type="submit">Acatualizar</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="process_pay_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="process_pay_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Proceso de pago</h5>
+                </div>
+                <div id="body_process_pay_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Total:</label>
+                        <label id="total_pay_modal_label" class="form-control"></label>
+                    </div>
+                    <div class="form-group">
+                        <label>Paga con:</label>
+                        <input id="pay_amount_input" type="text" maxlength="12" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="process_sale_btn" class="btn btn-primary">Aceptar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="resume_sale_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="resume_sale_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Resumen de venta</h5>
+                </div>
+                <div id="body_reume_sale_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Total:</label>
+                        <label id="total_resume_sale_modal_label" class="form-control"></label>
+                    </div>
+                    <div class="form-group">
+                        <label>Vuelto:</label>
+                        <label id="change_rseume_sale_modal_label" class="form-control"></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="open_cash_register_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="open_cash_register_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apertura de Caja</h5>
+                </div>
+                <div id="open_cash_register_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input id="open_amount_input" type="text" class="form-control" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Código de autorización</label>
+                        <input id="authorization_code_input" type="password" max="9999" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="open_cash_register_btn" class="btn btn-primary">Abrir caja</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="edit_quanty_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="edit_quanty_form" name="edit_quanty_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar cantidad</h5>
+                </div>
+                <div id="edit_quanty_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>cantidad</label>
+                        <!-- pattern="[0-9][.][0-9][0-9]" -->
+                        <input id="edit_quanty_input" class="form-control form-control-sm" type="number" step="0.01"
+                            placeholder="ej: 0.40" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit_quanty_btn" class="btn btn-primary">editar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="open_cash_drawer_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="open_cash_drawer_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Abrir gaveta</h5>
+                </div>
+                <div id="open_cash_drawer_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Código de autorización</label>
+                        <input id="code_open_cash_drawer_input" type="password" max="9999" maxlength="4"
+                            class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="open_cash_drawer_modal_btn" class="btn btn-primary">Abrir gaveta</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="money_income_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="money_income_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ingreso de dinero</h5>
+                </div>
+                <div id="money_income_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input id="money_income_amount_input" type="text" class="form-control" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Código de autorización</label>
+                        <input id="code_money_income_input" type="password" max="9999" maxlength="4"
+                            class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="money_income_modal_btn" class="btn btn-primary">Aceptar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="change_auth_code_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="change_auth_code_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cambiar código de autorización</h5>
+                </div>
+                <div id="change_auth_code_body_modal" class="modal-body">
+
+                    <div class="form-group">
+                        <label>Código de autorización</label>
+                        <input id="code_change_input" type="password" max="9999" maxlength="4" class="form-control"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nuevo código de autorización</label>
+                        <input id="new_code_change_input" type="password" max="9999" maxlength="4" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="change_code_modal_btn" class="btn btn-primary">Cambiar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="money_out_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="money_out_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Egreso de dinero</h5>
+                </div>
+                <div id="money_out_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input id="money_out_amount_input" type="text" class="form-control" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Código de autorización</label>
+                        <input id="code_money_out_input" type="password" max="9999" maxlength="4" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="money_out_modal_btn" class="btn btn-primary">Aceptar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="close_cash_register_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="close_cash_drawer_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cierre de caja</h5>
+                </div>
+                <div id="close_cash_drawer_body_modal" class="modal-body">
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Saldo en Caja:</label>
+                        <label class="col-sm-4 col-form-label" id="balance_close_cash_register_label"></label>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Imprimir reporte</label>
+                        <div class="col-sm-2 form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="print_close_report_switch"
+                                checked />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="close_cash_register_modal_btn" class="btn btn-primary">Cerrar caja</button>
+                    <button id="exit_btn_modal" class="btn btn-success">Salir</button>
+                    <button id="close_exit_btn_modal" class="btn btn-success">Cerrar caja y salir</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="sale_detail_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="close_cash_drawer_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle de venta</h5>
+                </div>
+                <div id="close_cash_drawer_body_modal" class="modal-body">
+                    <div class="form-group mrgn-left mrgn-bottom">
+                        <label id="id_total_sale_detail_label"></label>
+                    </div>
+                    <div id="sale_detail_grid_container">
+                        <div id="sale_detail_grid"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="edit_category_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="edit_category_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar categoría</h5>
+                </div>
+                <div id="edit_category_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>nombre</label>
+                        <input id="edit_category_input" type="text" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit_category_modal_btn" class="btn btn-primary">Actualizar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="edit_tax_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="edit_tax_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar categoría</h5>
+                </div>
+                <div id="edit_category_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>nombre</label>
+                        <input id="edit_tax_name_input" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>valor</label>
+                        <input id="edit_value_tax_input" class="form-control form-control" type="text" required
+                            pattern="[0-9][.][0-9][0-9]" title="ej: 1.19">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit_tax_modal_btn" class="btn btn-primary">Acatualizar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="select_table_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Selección de Mesa / Delivery</h5>
+            </div>
+            <div id="" class="modal-body">
+                <div class="select-table">
+                    <button id="table1" class="btn btn-success btn-table">M1</button>
+                    <button id="table2" class="btn btn-success btn-table">M2</button>
+                    <button id="table3" class="btn btn-success btn-table">M3</button>
+                    <button id="table4" class="btn btn-success btn-table">M4</button>
+                    <button id="table5" class="btn btn-success btn-table">M5</button>
+                    <button id="table6" class="btn btn-success btn-table">M6</button>
+                    <button id="table7" class="btn btn-success btn-table">M7</button>
+                    <button id="table8" class="btn btn-success btn-table">M8</button>
+                    <button id="table9" class="btn btn-success btn-table">M9</button>
+                    <button id="table10" class="btn btn-success btn-table">M10</button>
+                    <button id="delivery1" class="btn btn-info btn-table">D1</button>
+                    <button id="delivery2" class="btn btn-info btn-table">D2</button>
+                    <button id="delivery3" class="btn btn-info btn-table">D3</button>
+                    <button id="delivery4" class="btn btn-info btn-table">D4</button>
+                    <button id="delivery5" class="btn btn-info btn-table">D5</button>
+                    <button id="delivery6" class="btn btn-info btn-table">D6</button>
+                    <button id="delivery7" class="btn btn-info btn-table">D7</button>
+                    <button id="delivery8" class="btn btn-info btn-table">D9</button>
+                    <button id="delivery9" class="btn btn-info btn-table">D9</button>
+                    <button id="delivery10" class="btn btn-info btn-table">D10</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="duplicate_code_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <form id="edit_tax_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Código duplicado</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="duplicate_code_grid_container">
+                        <div id="duplicate_code_grid"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="order_detail_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <form id="edit_tax_form" name="open_cash_register_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle Pedido</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="order_detail_grid_container">
+                        <div id="order_detail_grid"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="edit_stock_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="edit_stock_form" name="add_stock_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 id="updta_stock_title" class="modal-title">Acatualizar Stock</h5>
+                </div>
+                <div id="edit_stock_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Cantidad en sala</label>
+                        <input id="room_update_stock_input" type="number" class="form-control" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad en bodega</label>
+                        <input id="warehouse_update_stock_input" type="number" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit_stock_modal_btn" class="btn btn-primary">Actualizar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="detail_order_note_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="detail_order_note_form" name="add_stock_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Nota al Pedido</h5>
+                </div>
+                <div  class="modal-body">
+                    <div class="form-group">
+                        <label>Mesa</label>
+                        <input id="detail_order_note_table_input" type="number" class="form-control" readonly required>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Nota</label>
+                        <input id="order_note_input" type="text" class="form-control">
+                    </div>
+     
+                </div>
+                <div class="modal-footer">
+                    <button id="note_order_btn" class="btn btn-primary">Pedir</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="delivery_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="delivery_form" name="add_stock_form" onsubmit="return false">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pedido Delivery</h5>
+                </div>
+                <div id="delivery_body_modal" class="modal-body">
+                    <div class="form-group">
+                        <label>Delivery</label>
+                        <input id="delivery_table_input" type="number" class="form-control" readonly required>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input id="delivery_phone_input" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input id="delivery_address_input" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nota</label>
+                        <input id="delivery_order_note_input" type="text" class="form-control">
+                    </div>
+                    <label class="col-sm-9 col-form-label">Transferencia</label>
+                    <div class="col-sm-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="delivery_transfer_switch" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="delivery_modal_btn" class="btn btn-primary">Pedir</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="alert_msg_modal" class="modal" tabindex="-1" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm alert-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alerta</h5>
+            </div>
+            <div class="modal-body">
+                <label id="alert_msg"></label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <script src="https://www.gstatic.com/jsaction/contract.js"></script>
+<script src="https://www.gstatic.com/jsaction/dispatcher.js" async></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script> -->
+<script>window.$ = window.jQuery = require('jquery');</script> <!-- Integración de jQuery -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> <!-- Bootstrap js -->
+<script src="./index.js"></script>
+
+</html>

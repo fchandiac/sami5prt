@@ -1,0 +1,52 @@
+{
+  "name": "sami5",
+  "version": "5.0.5",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://karmika.cl",
+  "keywords": [],
+  "author": "Felipe Chandía <felipe.chandia@karmika.cl>",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^11.4.4",
+    "electron-builder": "^22.11.7"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.5.0",
+    "chart.js": "^3.6.1",
+    "chartjs-plugin-datalabels": "^2.0.0",
+    "escpos": "^3.0.0-alpha.6",
+    "escpos-buffer": "^1.6.5",
+    "escpos-usb": "^3.0.0-alpha.4",
+    "express": "^4.17.1",
+    "gridjs": "^5.0.2",
+    "jquery": "^3.6.0",
+    "mysql2": "^2.3.3",
+    "pdf417-generator": "^1.0.4",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "xml2js": "^0.4.23"
+  },
+  "build": {
+    "appId": "com.karmika.cl.sami5",
+    "mac": {
+      "category": "sales"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ]
+    },
+    "asarUnpack": [
+      "config.json",
+      "movements.json",
+      "sami_5.sql",
+      "seed_db.sql"
+    ]
+  }
+}
