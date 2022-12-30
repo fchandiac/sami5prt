@@ -13,7 +13,6 @@ function render_money_string(value) {
         value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         value = '$ -' + value
         return value
-
     } else {
         value = value.toString()
         value = value.replace(/[^0-9]/g, '')
@@ -21,7 +20,6 @@ function render_money_string(value) {
         value = '$ ' + value
         return value
     }
-
 }
 
 function input_money_to_int(value) {
