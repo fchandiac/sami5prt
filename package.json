@@ -1,6 +1,6 @@
 {
   "name": "sami5",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -11,8 +11,8 @@
   "author": "Felipe Chandía <felipe.chandia@karmika.cl>",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^11.4.4",
-    "electron-builder": "^22.11.7"
+    "electron": "^22.0.0",
+    "electron-builder": "^22.10.3"
   },
   "dependencies": {
     "bindings": "^1.5.0",
@@ -30,6 +30,7 @@
     "pdf417-generator": "^1.0.4",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0",
+    "usb": "^2.6.0",
     "xml2js": "^0.4.23"
   },
   "build": {

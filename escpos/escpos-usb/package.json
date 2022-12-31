@@ -1,0 +1,46 @@
+{
+  "_from": "escpos-usb@^3.0.0-alpha.4",
+  "_id": "escpos-usb@3.0.0-alpha.4",
+  "_inBundle": false,
+  "_integrity": "sha512-SX/MlDZ0HEXFb4OZeUmXvA9hOkozU9IbWoxw4H7JbuQlVLZxBsL6bx/ZeReZlXViN2SyFJedIyNrFvVFu2Mpsw==",
+  "_location": "/escpos-usb",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "escpos-usb@^3.0.0-alpha.4",
+    "name": "escpos-usb",
+    "escapedName": "escpos-usb",
+    "rawSpec": "^3.0.0-alpha.4",
+    "saveSpec": null,
+    "fetchSpec": "^3.0.0-alpha.4"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/escpos-usb/-/escpos-usb-3.0.0-alpha.4.tgz",
+  "_shasum": "ed9953eff54b9b847a47406697c5401c8e37e234",
+  "_spec": "escpos-usb@^3.0.0-alpha.4",
+  "_where": "/Users/felipe/Desktop/Sami_5_mysql",
+  "author": {
+    "name": "Lsong",
+    "email": "song940@gmail.com",
+    "url": "https://lsong.org"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "usb": "*"
+  },
+  "deprecated": false,
+  "description": "usb adapter for escpos",
+  "gitHead": "17198f0d2e356be95f64d1121b97ee61b303d9be",
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "escpos-usb",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.0.0-alpha.4"
+}

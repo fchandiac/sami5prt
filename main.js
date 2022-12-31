@@ -58,6 +58,7 @@ function createWindow(){
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
             enableRemoteModule: true,
+            autoHideMenuBar: true,
             //webSecurity:false
         },
         width:1024,

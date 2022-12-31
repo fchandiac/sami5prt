@@ -1,0 +1,84 @@
+{
+  "_from": "escpos-buffer",
+  "_id": "escpos-buffer@1.6.5",
+  "_inBundle": false,
+  "_integrity": "sha512-EpgUwsMwbD1j6ar/3Q+BRIsgABkkhHHadnLlClYaprsAkjRlnxItWTJFSAPrWUm9Xw6e5UrHmltrFw+6NjUeAA==",
+  "_location": "/escpos-buffer",
+  "_phantomChildren": {
+    "safer-buffer": "2.1.2"
+  },
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "escpos-buffer",
+    "name": "escpos-buffer",
+    "escapedName": "escpos-buffer",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/escpos-buffer/-/escpos-buffer-1.6.5.tgz",
+  "_shasum": "53a29f385c9d12e232babc12bbcc7e87843c3126",
+  "_spec": "escpos-buffer",
+  "_where": "/Users/felipe/Desktop/Sami_5_mysql",
+  "author": {
+    "name": "GrandChef Team",
+    "email": "desenvolvimento@grandchef.com.br"
+  },
+  "bugs": {
+    "url": "https://github.com/grandchef/escpos-buffer/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "iconv-lite": "^0.5.0",
+    "pngjs": "^5.0.0",
+    "qrcode": "^1.4.4",
+    "tslib": "~1.10.0"
+  },
+  "deprecated": false,
+  "description": "Library to generate buffer for thermal printers.",
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@types/w3c-web-usb": "1.0.4",
+    "jest": "~24.9.0",
+    "prettier": "~1.18.2",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "~5.20.1",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-microsoft-contrib": "~6.2.0",
+    "tsutils": "~3.17.0",
+    "typescript": "~3.7.2"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "homepage": "https://github.com/grandchef/escpos-buffer#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "escpos-buffer",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/grandchef/escpos-buffer.git"
+  },
+  "scripts": {
+    "build": "tsc -d -p tsconfig.release.json",
+    "build:watch": "tsc -w -p tsconfig.release.json",
+    "clean": "rimraf coverage dist tmp",
+    "lint": "tslint -t stylish --project \"tsconfig.json\"",
+    "style:check": "prettier --check \"src/**/*.ts\"",
+    "style:fix": "prettier --write \"src/**/*.ts\"",
+    "test": "jest --coverage",
+    "test:debug": "node --inspect-brk=9229 node_modules/.bin/jest -i",
+    "test:watch": "jest --watch"
+  },
+  "version": "1.6.5"
+}

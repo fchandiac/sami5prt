@@ -1,0 +1,97 @@
+{
+  "_from": "escpos",
+  "_id": "escpos@3.0.0-alpha.6",
+  "_inBundle": false,
+  "_integrity": "sha512-c8AkmO6i9+Jjp1+KWlS3Bv/1VspaS1VSM+UX4XMN/7ICwnrdgF0Y4Oi+8kJxIit7M9xXEdN6ry//7Vbgr/Q0dw==",
+  "_location": "/escpos",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "escpos",
+    "name": "escpos",
+    "escapedName": "escpos",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/escpos/-/escpos-3.0.0-alpha.6.tgz",
+  "_shasum": "2044edc0c5000d34bf50ea77a59600581035ce05",
+  "_spec": "escpos",
+  "_where": "/Users/felipe/Desktop/Sami_5_mysql",
+  "author": {
+    "name": "Lsong",
+    "email": "hi@lsong.org",
+    "url": "https://lsong.org"
+  },
+  "bugs": {
+    "url": "https://github.com/song940/node-escpos/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Jose Vera",
+      "email": "hola@jose.com.co"
+    },
+    {
+      "name": "Sébastien Vidal",
+      "email": "Psychopoulet@GitHub.com"
+    },
+    {
+      "name": "Yu Yongwoo",
+      "email": "uyu423@gmail.com"
+    },
+    {
+      "name": "Attawit Kittikrairit",
+      "email": "atton16@gmail.com"
+    },
+    {
+      "name": "Risley Lima",
+      "email": "risley@rlimainfo.com.br"
+    },
+    {
+      "name": "Michael Kuenzli",
+      "email": "michael.kuenzli@camptocamp.com"
+    }
+  ],
+  "dependencies": {
+    "get-pixels": "*",
+    "iconv-lite": "*",
+    "mutable-buffer": "^2.0.3",
+    "qr-image": "*"
+  },
+  "deprecated": false,
+  "description": "ESC/POS Printer driver for nodejs",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=8.x"
+  },
+  "gitHead": "d1616e40f18cbeb8e1db332365fc0e167fba1308",
+  "homepage": "https://github.com/song940/node-escpos#readme",
+  "keywords": [
+    "escpos",
+    "printer"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "escpos",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/song940/node-escpos.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "3.0.0-alpha.6"
+}

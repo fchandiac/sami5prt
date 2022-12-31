@@ -1,0 +1,57 @@
+{
+  "_from": "pdf417-generator@^1.0.4",
+  "_id": "pdf417-generator@1.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-k5tc7e3VMr0eYI5fNMwVFpC2XYKTa946fZTPCh/eZzEcmbeAN796wAKgvEZDW3FilrM2qBek8yZ2Vqr7iLOKJA==",
+  "_location": "/pdf417-generator",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "pdf417-generator@^1.0.4",
+    "name": "pdf417-generator",
+    "escapedName": "pdf417-generator",
+    "rawSpec": "^1.0.4",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.4"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/pdf417-generator/-/pdf417-generator-1.0.4.tgz",
+  "_shasum": "208cc14b49c4bb792f8033fb829487998304cd52",
+  "_spec": "pdf417-generator@^1.0.4",
+  "_where": "/Users/felipe/Desktop/Sami_5_mysql",
+  "author": {
+    "name": "Petar Koretic"
+  },
+  "bugs": {
+    "url": "https://github.com/pkoretic/pdf417-generator/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "PDF417 HUB3 2D barcode generator for browser and Node",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "homepage": "https://github.com/pkoretic/pdf417-generator#readme",
+  "keywords": [
+    "pdf417",
+    "hub3",
+    "barcode",
+    "generator"
+  ],
+  "license": "MIT",
+  "main": "lib/pdf417.js",
+  "name": "pdf417-generator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkoretic/pdf417-generator.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.4"
+}
